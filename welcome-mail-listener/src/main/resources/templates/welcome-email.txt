@@ -1,0 +1,8 @@
+Welcome to Our Service!
+
+Dear {{ firstName }},
+
+We're glad to have you. Please let us know if you need any assistance.
+
+Best regards,
+The Team

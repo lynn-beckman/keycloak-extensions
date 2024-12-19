@@ -1,4 +1,4 @@
-package com.adelhub.kc;
+package com.beckman.kc;
 
 import io.pebbletemplates.pebble.PebbleEngine;
 import io.pebbletemplates.pebble.template.PebbleTemplate;
@@ -19,9 +19,9 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WelcomeEmailEventListenerProvider implements EventListenerProvider {
+public class UpdatePasswordEventListenerProvider implements EventListenerProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(WelcomeEmailEventListenerProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdatePasswordEventListenerProvider.class);
 
     private final KeycloakSession session;
 
@@ -34,25 +34,25 @@ public class WelcomeEmailEventListenerProvider implements EventListenerProvider 
     static {
         try {
             // Initialize Pebble templates
-            htmlTemplate = pebbleEngine.getTemplate("templates/welcome-email.html");
-            textTemplate = pebbleEngine.getTemplate("templates/welcome-email.txt");
+            htmlTemplate = pebbleEngine.getTemplate("templates/update-password-email.html");
+            textTemplate = pebbleEngine.getTemplate("templates/update-password-email.txt");
 
         } catch (Exception e) {
             logger.error("Error loading email templates", e);
         }
     }
 
-    public WelcomeEmailEventListenerProvider(KeycloakSession session) {
+    public UpdatePasswordEventListenerProvider(KeycloakSession session) {
         this.session = session;
     }
 
     @Override
     public void onEvent(Event event) {
         logger.info("Event received: {}", event.getType());
-        if (event.getType().equals(EventType.REGISTER)) {
-            logger.info("User registered with ID: {}", event.getUserId());
+        if (event.getType().equals(EventType.UPDATE_PASSWORD)) {
+            logger.info("User updated password with ID: {}", event.getUserId());
             UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
-            sendWelcomeEmail(user);
+            sendUpdatePasswordEmail(user);
         }
     }
 
@@ -63,7 +63,7 @@ public class WelcomeEmailEventListenerProvider implements EventListenerProvider 
             logger.info("User registered with ID: {}", userId);
             UserModel user = session.users().getUserById(session.getContext().getRealm(), userId);
             if (user != null) {
-                sendWelcomeEmail(user);
+                sendUpdatePasswordEmail(user);
             }
 
         }
@@ -75,7 +75,7 @@ public class WelcomeEmailEventListenerProvider implements EventListenerProvider 
 
     }
 
-    private void sendWelcomeEmail(UserModel user) {
+    private void sendUpdatePasswordEmail(UserModel user) {
         String firstName = user.getFirstName();
         // Prepare data for the template
         Map<String, Object> context = new HashMap<>();

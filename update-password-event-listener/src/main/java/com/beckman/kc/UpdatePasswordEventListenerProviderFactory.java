@@ -1,4 +1,4 @@
-package com.adelhub.kc;
+package com.beckman.kc;
 
 import org.keycloak.Config;
 import org.keycloak.events.EventListenerProvider;
@@ -8,19 +8,19 @@ import org.keycloak.models.KeycloakSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WelcomeEmailEventListenerProviderFactory implements EventListenerProviderFactory {
+public class UpdatePasswordEventListenerProviderFactory implements EventListenerProviderFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(WelcomeEmailEventListenerProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdatePasswordEventListenerProvider.class);
 
 
     @Override
     public EventListenerProvider create(KeycloakSession session) {
-        return new WelcomeEmailEventListenerProvider(session);
+        return new UpdatePasswordEventListenerProvider(session);
     }
 
     @Override
     public void init(Config.Scope config) {
-        logger.info("Initialized welcome email provider");
+        logger.info("Initialized password event provider");
     }
 
     @Override
@@ -35,6 +35,6 @@ public class WelcomeEmailEventListenerProviderFactory implements EventListenerPr
 
     @Override
     public String getId() {
-        return "welcome-email-listener";
+        return "update-password-event-listener";
     }
 }

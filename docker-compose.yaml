@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -8,9 +8,9 @@ services:
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
   keycloak:
-    image: quay.io/keycloak/keycloak:25.0.2
+    image: quay.io/keycloak/keycloak:26.0.7
     volumes: # Add this
-      - ./welcome-mail-listener/target/welcome-mail-listener-1.0-SNAPSHOT.jar:/opt/keycloak/providers/welcome-mail-listener.jar
+      - ./update-password-event-listener/target/update-password-event-listener-1.0-SNAPSHOT.jar:/opt/keycloak/providers/update-password-event-listener.jar
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak

@@ -10,7 +10,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
+        <version>3.4.1</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -45,23 +45,23 @@
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi</artifactId>
-      <version>25.0.2</version>
+      <version>26.0.7</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-server-spi-private</artifactId>
-      <version>25.0.2</version>
+      <version>26.0.7</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-services</artifactId>
-      <version>25.0.2</version>
+      <version>26.0.7</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
   <properties>
-    <keycloak.version>25.0.2</keycloak.version>
+    <keycloak.version>26.0.7</keycloak.version>
   </properties>
 </project>

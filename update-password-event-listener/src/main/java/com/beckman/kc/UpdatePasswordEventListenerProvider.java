@@ -49,7 +49,7 @@ public class UpdatePasswordEventListenerProvider implements EventListenerProvide
     @Override
     public void onEvent(Event event) {
         logger.info("Event received: {}", event.getType());
-        if (event.getType().equals(EventType.UPDATE_PASSWORD)) {
+        if (event.getType().equals(EventType.UPDATE_CREDENTIAL)) {
             logger.info("User updated password with ID: {}", event.getUserId());
             UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
             sendUpdatePasswordEmail(user);

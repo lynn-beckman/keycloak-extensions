@@ -94,7 +94,7 @@ public class UpdatePasswordEventListenerProvider implements EventListenerProvide
 
         String htmlBody = htmlWriter.toString();
         String textBody = textWriter.toString();
-        String subject = "Welcome to our Awesome App";
+        String subject = "Notification of MARS Password Change";
 
         // Send the email
         sendEmail(user, subject, htmlBody, textBody);

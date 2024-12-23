@@ -1,4 +1,4 @@
-package com.beckman.kc;
+package com.beckman.keycloak;
 
 import org.keycloak.Config;
 import org.keycloak.events.EventListenerProvider;

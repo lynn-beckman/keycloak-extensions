@@ -1,4 +1,4 @@
-package com.beckman.kc;
+package com.beckman.keycloak;
 
 import io.pebbletemplates.pebble.PebbleEngine;
 import io.pebbletemplates.pebble.template.PebbleTemplate;

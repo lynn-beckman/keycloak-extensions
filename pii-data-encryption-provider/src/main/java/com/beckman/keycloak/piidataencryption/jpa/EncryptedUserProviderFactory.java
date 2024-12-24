@@ -6,12 +6,11 @@ import org.keycloak.connections.jpa.JpaConnectionProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.models.UserProviderFactory;
-import org.keycloak.provider.Provider;
 
-public class EncryptedUserProviderFactory implements UserProviderFactory {
+public class EncryptedUserProviderFactory implements UserProviderFactory<EncryptedUserProvider>  {
 
     @Override
-    public Provider create(KeycloakSession ks) {
+    public EncryptedUserProvider create(KeycloakSession ks) {
         EntityManager em = ks.getProvider(JpaConnectionProvider.class).getEntityManager();
         return new EncryptedUserProvider(ks, em);
     }

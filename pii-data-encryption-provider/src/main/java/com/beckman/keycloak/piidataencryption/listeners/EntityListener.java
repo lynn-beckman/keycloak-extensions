@@ -51,7 +51,7 @@ public class EntityListener implements Integrator, PreLoadEventListener, PostLoa
         EntityManager em = ple.getSession().getSessionFactory().createEntityManager();
         EncryptedUserEntity eue;
         if (ple.getEntity() instanceof UserEntity ue && null != (eue = LogicUtils.getEncryptedUserEntity(em, ue, false))) {
-            String[] props = ple.getPersister().getEntityMetamodel().getPropertyNames();
+            String[] props = ple.getPersister().getPropertyNames();
             Object[] states = ple.getState();
             for (int i = 0; i < props.length; i++) {
                 switch (props[i]) {
@@ -68,7 +68,7 @@ public class EntityListener implements Integrator, PreLoadEventListener, PostLoa
         }
         if (ple.getEntity() instanceof UserAttributeEntity uae) {
             Map<String, Integer> cols = new HashMap<>(Map.of("user", -1, "name", -1, "value", -1));
-            String[] propertyNames = ple.getPersister().getEntityMetamodel().getPropertyNames();
+            String[] propertyNames = ple.getPersister().getPropertyNames();
             Object[] states = ple.getState();
             for (int i = 0; i < propertyNames.length; i++) {
                 if (cols.containsKey(propertyNames[i])) {

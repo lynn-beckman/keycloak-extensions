@@ -66,7 +66,7 @@ public class EntityListener implements Integrator, PreLoadEventListener, PostLoa
                 }
             }
         }
-        if (ple.getEntity() instanceof UserAttributeEntity uae) {
+        if (ple.getEntity() instanceof UserAttributeEntity) {
             Map<String, Integer> cols = new HashMap<>(Map.of("user", -1, "name", -1, "value", -1));
             String[] propertyNames = ple.getPersister().getPropertyNames();
             Object[] states = ple.getState();

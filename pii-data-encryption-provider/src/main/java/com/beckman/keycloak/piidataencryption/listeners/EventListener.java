@@ -36,7 +36,7 @@ public class EventListener implements EventListenerProvider {
 
     @Override
     public void onEvent(AdminEvent ae, boolean bln) {
-        if (ae.getResourceType() == ResourceType.USER && ae.getOperationType() == OperationType.UPDATE) {
+        if (ae.getResourceType() == ResourceType.USER && (ae.getOperationType() == OperationType.UPDATE || ae.getOperationType() == OperationType.CREATE)) {
             String userId = ae.getResourcePath().split("/")[1];
             encryptUserWithId(userId);
         }

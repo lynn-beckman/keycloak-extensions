@@ -59,6 +59,8 @@ public class EntityListener implements Integrator, PreLoadEventListener, PostLoa
                         states[i] = EncryptionUtils.decryptValue(eue.getUsername());
                     case "email" ->
                         states[i] = EncryptionUtils.decryptValue(eue.getEmail());
+                    case "emailConstraint" ->
+                            states[i] = EncryptionUtils.decryptValue(eue.getEmailConstraint());
                     case "firstName" ->
                         states[i] = EncryptionUtils.decryptValue(eue.getFirstName());
                     case "lastName" ->

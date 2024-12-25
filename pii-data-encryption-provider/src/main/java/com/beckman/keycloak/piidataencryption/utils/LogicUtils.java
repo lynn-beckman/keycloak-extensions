@@ -6,6 +6,7 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.jboss.logging.Logger;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserProvider;
@@ -22,6 +23,8 @@ import com.beckman.keycloak.piidataencryption.jpa.EncryptedUserEntity;
 import com.beckman.keycloak.piidataencryption.jpa.EncryptedUserProvider;
 
 public final class LogicUtils {
+
+    private static final Logger logger = Logger.getLogger(LogicUtils.class);
 
     public static void setUserEncryptionEnabled(RealmModel realm, boolean enabled) {
         realm.setAttribute("users.encrypt", enabled);
@@ -110,13 +113,17 @@ public final class LogicUtils {
         }
         eue.setUsername(EncryptionUtils.encryptValue(ue.getUsername()));
         eue.setEmail(EncryptionUtils.encryptValue(ue.getEmail()));
+        eue.setEmailConstraint(EncryptionUtils.encryptValue(ue.getEmailConstraint()));
         eue.setFirstName(EncryptionUtils.encryptValue(ue.getFirstName()));
         eue.setLastName(EncryptionUtils.encryptValue(ue.getLastName()));
         em.persist(eue);
-        Query update = em.createQuery("UPDATE UserEntity u SET u.username = :username, u.email = :email, u.firstName = :firstName, u.lastName = :lastName WHERE u.id = :id");
+        
+        logger.debugf("Encrypt UserEntity emailConstraint: %s", ue.getEmailConstraint());
+        Query update = em.createQuery("UPDATE UserEntity u SET u.username = :username, u.email = :email, u.emailConstraint = :emailConstraint, u.firstName = :firstName, u.lastName = :lastName WHERE u.id = :id");
         update.setParameter("id", ue.getId());
         update.setParameter("username", LogicUtils.hash(ue.getUsername()));
         update.setParameter("email", LogicUtils.hash(ue.getEmail()));
+        update.setParameter("emailConstraint", LogicUtils.hash(ue.getEmailConstraint()));
         update.setParameter("firstName", LogicUtils.hash(ue.getFirstName()));
         update.setParameter("lastName", LogicUtils.hash(ue.getLastName()));
         update.executeUpdate();
@@ -146,10 +153,11 @@ public final class LogicUtils {
             EncryptedUserEntity eue;
             eue = LogicUtils.getEncryptedUserEntity(em, user, false);
             if (eue != null) {
-                Query update = em.createQuery("UPDATE UserEntity u SET u.username = :username, u.email = :email, u.firstName = :firstName, u.lastName = :lastName WHERE u.id = :id");
+                Query update = em.createQuery("UPDATE UserEntity u SET u.username = :username, u.email = :email, u.emailConstraint = :emailConstraint, u.firstName = :firstName, u.lastName = :lastName WHERE u.id = :id");
                 update.setParameter("id", user.getId());
                 update.setParameter("username", EncryptionUtils.decryptValue(eue.getUsername()));
                 update.setParameter("email", EncryptionUtils.decryptValue(eue.getEmail()));
+                update.setParameter("emailConstraint", EncryptionUtils.decryptValue(eue.getEmailConstraint()));
                 update.setParameter("firstName", EncryptionUtils.decryptValue(eue.getFirstName()));
                 update.setParameter("lastName", EncryptionUtils.decryptValue(eue.getLastName()));
                 update.executeUpdate();

@@ -23,6 +23,10 @@ public class EncryptedUserEntity {
 
     @Column(name = "EMAIL", length = 500)
     protected String email;
+    
+    // This is necessary to be able to dynamically switch unique email constraints on and off in the realm settings
+    @Column(name = "EMAIL_CONSTRAINT", length = 500)
+    protected String emailConstraint;
 
     @Column(name = "USERNAME", length = 500)
     protected String username;
@@ -53,6 +57,10 @@ public class EncryptedUserEntity {
         return email;
     }
 
+    public String getEmailConstraint() {
+        return emailConstraint;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -67,6 +75,10 @@ public class EncryptedUserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setEmailConstraint(String emailConstraint) {
+        this.emailConstraint = emailConstraint;
     }
 
     public void setUsername(String username) {

@@ -38,10 +38,9 @@ The JAR plugin needs to be mounted in the /opt/keycloak/providers directory of t
 ```yaml
 services:
   keycloak:
-    #image: becls-keycloak:26.0.6
     image: quay.io/keycloak/keycloak:26.0.6
     command: ["start","--features=declarative-ui", "--spi-user-provider=jpa-encrypted"]
-    volumes: # Add provider JAR
+    volumes: # Add keycloak plugins.
       - ./pii-data-encryption-provider/target/pii-data-encryption-1.0.jar:/opt/keycloak/providers/pii-data-encryption.jar
 ```
 

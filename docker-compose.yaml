@@ -10,10 +10,9 @@ services:
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
   keycloak:
-    #image: becls-keycloak:26.0.6
     image: quay.io/keycloak/keycloak:26.0.6
     command: ["start","--features=declarative-ui", "--spi-user-provider=jpa-encrypted"]
-    volumes: # Add this
+    volumes: # Add keycloak plugins.
       - ./update-password-event-listener/target/update-password-event-listener-1.0.jar:/opt/keycloak/providers/update-password-event-listener.jar
       - ./pii-data-encryption-provider/target/pii-data-encryption-1.0.jar:/opt/keycloak/providers/pii-data-encryption.jar
     environment:

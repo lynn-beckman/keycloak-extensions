@@ -19,8 +19,6 @@ import org.jboss.logging.Logger;
 
 /**
  * Provide encryption functionalities.
- *
- * @author MLukman (https://github.com/MLukman)
  */
 public final class EncryptionUtils {
 

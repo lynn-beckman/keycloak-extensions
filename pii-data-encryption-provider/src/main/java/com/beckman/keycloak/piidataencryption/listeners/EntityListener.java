@@ -27,8 +27,6 @@ import com.beckman.keycloak.piidataencryption.utils.LogicUtils;
 /**
  * Listen to PrePersist, PreUpdate & PostLoad entity events and perform
  * encryption and decryption if entity is UserAttributeEntity
- *
- * @author MLukman (https://github.com/MLukman)
  */
 public class EntityListener implements Integrator, PreLoadEventListener, PostLoadEventListener {
 

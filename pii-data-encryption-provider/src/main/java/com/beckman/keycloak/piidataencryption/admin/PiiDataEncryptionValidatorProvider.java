@@ -16,8 +16,7 @@ import com.beckman.keycloak.piidataencryption.utils.LogicUtils;
 /**
  * Provide "pii-data-encryption" user attribute validator type inside
  * Create/Edit attribute forms.
- *
- * @author MLukman (https://github.com/MLukman)
+ * Reference: https://github.com/MLukman
  */
 public class PiiDataEncryptionValidatorProvider extends AbstractSimpleValidator implements ConfiguredProvider {
 

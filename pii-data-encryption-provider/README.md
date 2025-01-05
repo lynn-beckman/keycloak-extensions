@@ -30,7 +30,7 @@ Copy paste the packaged JAR file from inside `target` folder into Keycloak's `pr
 ```shell
 cd pii-data-encryption-provider
 mvn clean package
-docker compose u -d
+docker compose up -d
 ```
 
 The JAR plugin needs to be mounted in the /opt/keycloak/providers directory of the Docker image. Below is a sample docker-compose.yaml:
